@@ -51,10 +51,10 @@ return [
     'otp' => [
         'enabled' => env('OTP_ENABLED', true),
         'length' => env('OTP_LENGTH', 6),
-        'expiry' => env('OTP_EXPIRY', 10), // minutes
-        'throttle' => env('OTP_THROTTLE', 1), // minutes between requests
+        'expiry' => env('OTP_EXPIRY', 10),
+        'throttle' => env('OTP_THROTTLE', 1),
+        'allow_new_users' => env('OTP_ALLOW_NEW_USERS', true), // NEW: Allow registration via OTP
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Development Settings

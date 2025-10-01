@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\UserAuth\Services;
+namespace MostafaFathi\UserAuth\Services;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -81,7 +81,7 @@ class AuthService
 
         if (!$user && config('user-auth.otp.allow_new_users', true)) {
             // Allow creating new users via OTP
-            $defaultUserType = \YourVendor\UserAuth\Models\UserType::where('name', 'user')->first();
+            $defaultUserType = \MostafaFathi\UserAuth\Models\UserType::where('name', 'user')->first();
             $user = $userModel::create([
                 'name' => explode('@', $email)[0],
                 'email' => $email,
@@ -106,7 +106,7 @@ class AuthService
         $code = $this->generateOtpCode();
         $token = Str::random(60);
 
-        \YourVendor\UserAuth\Models\OtpCode::create([
+        \MostafaFathi\UserAuth\Models\OtpCode::create([
             'email' => $email,
             'code' => $code,
             'token' => $token,
@@ -156,7 +156,7 @@ class AuthService
     public function migrateExistingUsers(): array
     {
         $userModel = config('auth.providers.users.model', \App\Models\User::class);
-        $defaultUserType = \YourVendor\UserAuth\Models\UserType::where('name', 'user')->first();
+        $defaultUserType = \MostafaFathi\UserAuth\Models\UserType::where('name', 'user')->first();
 
         if (!$defaultUserType) {
             return ['success' => false, 'message' => 'Default user type not found'];

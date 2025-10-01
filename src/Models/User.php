@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\UserAuth\Models;
+namespace MostafaFathi\UserAuth\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

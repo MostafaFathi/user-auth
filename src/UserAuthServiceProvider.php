@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\UserAuth;
+namespace MostafaFathi\UserAuth;
 
 use Illuminate\Support\ServiceProvider;
 use YourVendor\UserAuth\Services\AuthService;

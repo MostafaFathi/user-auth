@@ -1,4 +1,4 @@
-# User Auth Package
+# Laravel User Auth Package
 
 A comprehensive Laravel package for user type management with SSO and OTP authentication support.
 
@@ -10,8 +10,55 @@ A comprehensive Laravel package for user type management with SSO and OTP authen
 - Development-friendly with test email support
 - Flexible configuration
 
+## Requirements
+
+- PHP 8.0 or higher
+- Laravel 9.x or 10.x
+
 ## Installation
 
-1. Install the package via Composer:
+You can install the package via Composer:
+
 ```bash
-composer require MostafaFathi/user-auth
+composer require mostafafathi/user-auth
+```
+
+## Configuration
+### Publish the configuration file:
+
+```bash
+php artisan vendor:publish --provider="MostafaFathi\\UserAuth\\UserAuthServiceProvider" --tag=user-auth-config
+```
+
+### Publish and run migrations:
+
+```bash
+php artisan vendor:publish --provider="MostafaFathi\\UserAuth\\UserAuthServiceProvider" --tag=user-auth-migrations
+php artisan migrate
+```
+
+### Seed user types:
+```bash
+php artisan db:seed --class=UserTypeSeeder
+```
+
+## Usage
+## Environment Variables
+Add these to your .env file:
+
+```dotenv
+USER_AUTH_METHOD=sso
+SSO_ENABLED=true
+OTP_ENABLED=true
+TEST_EMAIL=test@example.com
+```
+
+## SSO Configuration
+Configure your SSO providers in the "config/user-auth.php" file.
+
+## License
+The MIT License (MIT). Please see License File for more information.
+
+
+
+

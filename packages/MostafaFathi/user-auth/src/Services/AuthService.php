@@ -46,7 +46,7 @@ class AuthService
 
     protected function createUserFromSso(array $ssoUser, string $userModel)
     {
-        $defaultUserType = \YourVendor\UserAuth\Models\UserType::where('name', 'user')->first();
+        $defaultUserType = \MostafaFathi\UserAuth\Models\UserType::where('name', 'user')->first();
 
         return $userModel::create([
             'name' => $this->ssoDriver->getName() ?? $ssoUser['email'] ?? 'User',
@@ -85,7 +85,7 @@ class AuthService
             $user = $userModel::create([
                 'name' => explode('@', $email)[0],
                 'email' => $email,
-                'user_type_id' => $defaultUserType->id,
+                'user_type_id' => $defaultUserType->id ?? null,
                 'password' => Hash::make(Str::random(32)),
             ]);
         }
@@ -95,7 +95,7 @@ class AuthService
         }
 
         // Check throttle
-        $recentOtp = \YourVendor\UserAuth\Models\OtpCode::where('email', $email)
+        $recentOtp = \MostafaFathi\UserAuth\Models\OtpCode::where('email', $email)
             ->where('created_at', '>', now()->subMinutes(config('user-auth.otp.throttle')))
             ->first();
 
@@ -118,7 +118,7 @@ class AuthService
 
     public function verifyOtp(string $token, string $code)
     {
-        $otp = \YourVendor\UserAuth\Models\OtpCode::where('token', $token)
+        $otp = \MostafaFathi\UserAuth\Models\OtpCode::where('token', $token)
             ->where('code', $code)
             ->first();
 

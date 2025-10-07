@@ -3,35 +3,45 @@
 namespace MostafaFathi\UserAuth;
 
 use Illuminate\Support\ServiceProvider;
-use YourVendor\UserAuth\Services\AuthService;
+use MostafaFathi\UserAuth\Services\AuthService;
 
 class UserAuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        // Get the package base directory
+        $packageBaseDir = dirname(__DIR__);
+
+        // Publish configuration
         $this->publishes([
-            __DIR__.'/../../config/user-auth.php' => config_path('user-auth.php'),
+            $packageBaseDir . '/config/user-auth.php' => config_path('user-auth.php'),
         ], 'user-auth-config');
 
+        // Publish migrations
         $this->publishes([
-            __DIR__.'/../../database/migrations' => database_path('migrations'),
+            $packageBaseDir . '/database/migrations' => database_path('migrations'),
         ], 'user-auth-migrations');
 
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
+        // Load routes if the file exists
+        $routesPath = $packageBaseDir . '/routes/web.php';
+        if (file_exists($routesPath)) {
+            $this->loadRoutesFrom($routesPath);
+        }
 
         // Register console command
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Console\Commands\MigrateExistingUsers::class,
+                // We'll register this later after creating the command
             ]);
         }
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../../config/user-auth.php', 'user-auth'
-        );
+        $configPath = dirname(__DIR__) . '/config/user-auth.php';
+        if (file_exists($configPath)) {
+            $this->mergeConfigFrom($configPath, 'user-auth');
+        }
 
         $this->app->singleton(AuthService::class, function ($app) {
             return new AuthService();

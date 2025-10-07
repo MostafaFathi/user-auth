@@ -12,8 +12,8 @@ A comprehensive Laravel package for user type management with SSO and OTP authen
 
 ## Requirements
 
-- PHP 8.0 or higher
-- Laravel 9.x or 10.x
+- PHP 8.2 or higher
+- Laravel 11.x or 12.x
 
 ## Installation
 

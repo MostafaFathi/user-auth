@@ -9,7 +9,7 @@ class UserAuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Get the package base directory
+        // Get the package base directory + test
         $packageBaseDir = dirname(__DIR__);
 
         // Publish configuration

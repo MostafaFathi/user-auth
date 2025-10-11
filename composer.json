@@ -20,7 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "MostafaFathi\\UserAuth\\": "src/"
+            "MostafaFathi\\UserAuth\\": "src/",
+            "MostafaFathi\\UserAuth\\Http\\Controllers\\": "src/Http/Controllers"
         }
     },
     "autoload-dev": {

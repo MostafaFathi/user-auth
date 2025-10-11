@@ -23,7 +23,7 @@ class UserAuthServiceProvider extends ServiceProvider
         ], 'user-auth-migrations');
 
         $this->publishes([
-            $packageBaseDir . '/src/Http/Controllers' => app_path('Http/Controllers/Vendor/UserAuth'),
+            $packageBaseDir . '/src/Http/Controllers' => app_path('Http/Controllers/Auth'),
         ], 'user-auth-controllers');
         // Load routes if the file exists
         $routesPath = $packageBaseDir . '/routes/web.php';

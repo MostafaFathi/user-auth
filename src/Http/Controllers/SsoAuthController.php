@@ -5,13 +5,13 @@ namespace MostafaFathi\UserAuth\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use MostafaFathi\UserAuth\Services\AuthService;
+use MostafaFathi\UserAuth\Services\SsoAuthService;
 
-class AuthController extends Controller
+class SsoAuthController extends Controller
 {
     protected $authService;
 
-    public function __construct(AuthService $authService)
+    public function __construct(SsoAuthService $authService)
     {
         $this->authService = $authService;
     }

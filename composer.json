@@ -21,7 +21,7 @@
     "autoload": {
         "psr-4": {
             "MostafaFathi\\UserAuth\\": "src/",
-            "MostafaFathi\\UserAuth\\Http\\Controllers\\": "src/Http/Controllers"
+            "app\\Http\\Controllers\\": "src/Http/Controllers"
         }
     },
     "autoload-dev": {

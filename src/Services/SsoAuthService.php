@@ -5,7 +5,7 @@ namespace MostafaFathi\UserAuth\Services;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class AuthService
+class SsoAuthService
 {
     protected $ssoDriver;
 

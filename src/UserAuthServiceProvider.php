@@ -3,7 +3,7 @@
 namespace MostafaFathi\UserAuth;
 
 use Illuminate\Support\ServiceProvider;
-use MostafaFathi\UserAuth\Services\AuthService;
+use MostafaFathi\UserAuth\Services\SsoAuthService;
 
 class UserAuthServiceProvider extends ServiceProvider
 {
@@ -46,8 +46,8 @@ class UserAuthServiceProvider extends ServiceProvider
             $this->mergeConfigFrom($configPath, 'user-auth');
         }
 
-        $this->app->singleton(AuthService::class, function ($app) {
-            return new AuthService();
+        $this->app->singleton(SsoAuthService::class, function ($app) {
+            return new SsoAuthService();
         });
     }
 }

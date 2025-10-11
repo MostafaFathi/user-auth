@@ -15,16 +15,16 @@ class UserAuthServiceProvider extends ServiceProvider
         // Publish configuration
         $this->publishes([
             $packageBaseDir . '/config/user-auth.php' => config_path('user-auth.php'),
-        ], 'user-auth-config');
+        ], 'sso-user-auth-config');
 
         // Publish migrations
         $this->publishes([
             $packageBaseDir . '/database/migrations' => database_path('migrations'),
-        ], 'user-auth-migrations');
+        ], 'sso-user-auth-migrations');
 
         $this->publishes([
             $packageBaseDir . '/src/Http/Controllers' => app_path('Http/Controllers/Auth'),
-        ], 'user-auth-controllers');
+        ], 'sso-user-auth-controllers');
         // Load routes if the file exists
         $routesPath = $packageBaseDir . '/routes/web.php';
         if (file_exists($routesPath)) {

@@ -37,6 +37,8 @@ class UserAuthServiceProvider extends ServiceProvider
                 // We'll register this later after creating the command
             ]);
         }
+        $this->updatePublishedControllersNamespace();
+
     }
 
     public function register()
@@ -49,5 +51,18 @@ class UserAuthServiceProvider extends ServiceProvider
         $this->app->singleton(SsoAuthService::class, function ($app) {
             return new SsoAuthService();
         });
+    }
+    protected function updatePublishedControllersNamespace()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../Http/Controllers' => app_path('Http/Controllers/UserAuth'),
+            ], 'user-auth-controllers');
+
+            // After publishing, update the namespace
+            $this->commands([
+                Console\Commands\UpdateControllersNamespace::class,
+            ]);
+        }
     }
 }

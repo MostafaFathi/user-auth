@@ -12,7 +12,7 @@ class UpdateControllersNamespace extends Command
 
     public function handle()
     {
-        $controllersPath = app_path('Http/Controllers/UserAuth');
+        $controllersPath = app_path('Http/Controllers/Auth');
 
         if (!File::exists($controllersPath)) {
             $this->error('No published controllers found. Please publish first.');
@@ -28,14 +28,14 @@ class UpdateControllersNamespace extends Command
                 // Replace namespace
                 $newContent = str_replace(
                     'namespace MostafaFathi\UserAuth\Http\Controllers;',
-                    'namespace App\Http\Controllers\UserAuth;',
+                    'namespace App\Http\Controllers\Auth;',
                     $content
                 );
 
                 // Also update any class references if needed
                 $newContent = str_replace(
                     'MostafaFathi\UserAuth\Http\Controllers\\',
-                    'App\Http\Controllers\UserAuth\\',
+                    'App\Http\Controllers\Auth\\',
                     $newContent
                 );
 

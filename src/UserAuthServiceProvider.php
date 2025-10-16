@@ -63,6 +63,7 @@ class UserAuthServiceProvider extends ServiceProvider
             $this->commands([
                 Console\Commands\UpdateControllersNamespace::class,
             ]);
+
         }
     }
 }

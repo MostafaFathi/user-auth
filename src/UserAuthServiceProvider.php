@@ -54,6 +54,7 @@ class UserAuthServiceProvider extends ServiceProvider
             return new SsoAuthService();
         });
     }
+
     /**
      * Update the namespace of published controllers after publishing
      */
@@ -66,6 +67,7 @@ class UserAuthServiceProvider extends ServiceProvider
                 $publishedPath = app_path('Http/Controllers/Auth');
 
                 if (File::exists($publishedPath)) {
+                    dd($publishedPath);
                     $this->updateControllersNamespace($publishedPath);
                 }
             }
@@ -89,7 +91,7 @@ class UserAuthServiceProvider extends ServiceProvider
                     'namespace App\Http\Controllers\Auth;',
                     $content
                 );
-
+                dd('test',$newContent);
                 File::put($file, $newContent);
             }
         }

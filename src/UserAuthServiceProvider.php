@@ -3,6 +3,7 @@
 namespace MostafaFathi\UserAuth;
 
 use Illuminate\Support\ServiceProvider;
+use MostafaFathi\UserAuth\Console\Commands\UpdateControllersNamespace;
 use MostafaFathi\UserAuth\Services\SsoAuthService;
 
 class UserAuthServiceProvider extends ServiceProvider
@@ -61,7 +62,7 @@ class UserAuthServiceProvider extends ServiceProvider
 
             // After publishing, update the namespace
             $this->commands([
-                Console\Commands\UpdateControllersNamespace::class,
+                UpdateControllersNamespace::class,
             ]);
 
         }

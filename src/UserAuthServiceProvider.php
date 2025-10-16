@@ -2,6 +2,7 @@
 
 namespace MostafaFathi\UserAuth;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use MostafaFathi\UserAuth\Console\Commands\UpdateControllersNamespace;
 use MostafaFathi\UserAuth\Services\SsoAuthService;
@@ -38,7 +39,7 @@ class UserAuthServiceProvider extends ServiceProvider
                 // We'll register this later after creating the command
             ]);
         }
-        $this->updatePublishedControllersNamespace();
+        $this->updateControllersNamespaceAfterPublish();
 
     }
 
@@ -53,18 +54,44 @@ class UserAuthServiceProvider extends ServiceProvider
             return new SsoAuthService();
         });
     }
-    protected function updatePublishedControllersNamespace()
+    /**
+     * Update the namespace of published controllers after publishing
+     */
+    protected function updateControllersNamespaceAfterPublish()
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../Http/Controllers' => app_path('Http/Controllers/UserAuth'),
-            ], 'user-auth-controllers');
+        // This will run after the publish command completes
+        $this->app->booted(function () {
+            if ($this->app->runningInConsole()) {
+                // Check if we just published controllers
+                $publishedPath = app_path('Http/Controllers/Auth');
 
-            // After publishing, update the namespace
-            $this->commands([
-                UpdateControllersNamespace::class,
-            ]);
+                if (File::exists($publishedPath)) {
+                    $this->updateControllersNamespace($publishedPath);
+                }
+            }
+        });
+    }
 
+    /**
+     * Update namespace in controller files
+     */
+    protected function updateControllersNamespace(string $controllersPath)
+    {
+        $files = File::allFiles($controllersPath);
+
+        foreach ($files as $file) {
+            if ($file->getExtension() === 'php') {
+                $content = File::get($file);
+
+                // Replace namespace
+                $newContent = str_replace(
+                    'namespace MostafaFathi\UserAuth\Http\Controllers;',
+                    'namespace App\Http\Controllers\Auth;',
+                    $content
+                );
+
+                File::put($file, $newContent);
+            }
         }
     }
 }

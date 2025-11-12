@@ -44,6 +44,11 @@ class SsoAuthController extends Controller
         ]);
     }
 
+    public function otpVerifyPage()
+    {
+        return view('users.auth.otp');
+    }
+
     public function requestOtp(Request $request)
     {
         $request->validate([

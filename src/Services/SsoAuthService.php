@@ -28,7 +28,7 @@ class SsoAuthService
         }
 
         // Use the application's User model
-        $userModel = config('auth.providers.users.model', \App\Models\User::class);
+        $userModel = config('user-auth.providers.users.model', 'auth.providers.users.model');
 
         // Check if user exists by SSO ID or email
         $user = $userModel::where('sso_id', $ssoUser['id'])
@@ -74,7 +74,7 @@ class SsoAuthService
     public function sendOtp(string $email): ?string
     {
         // Use the application's User model
-        $userModel = config('auth.providers.users.model', \App\Models\User::class);
+        $userModel = config('user-auth.providers.users.model', 'auth.providers.users.model');
 
         // Check if user exists or can be created
         $user = $userModel::where('email', $email)->first();
@@ -128,7 +128,7 @@ class SsoAuthService
 
         $otp->markAsUsed();
 
-        $userModel = config('auth.providers.users.model', \App\Models\User::class);
+        $userModel = config('user-auth.providers.users.model', 'auth.providers.users.model');
         return $userModel::where('email', $otp->email)->first();
     }
 
@@ -146,7 +146,7 @@ class SsoAuthService
             return null;
         }
 
-        $userModel = config('auth.providers.users.model', \App\Models\User::class);
+        $userModel = config('user-auth.providers.users.model', 'auth.providers.users.model');
         return $userModel::where('email', $testEmail)->first();
     }
 
@@ -155,7 +155,7 @@ class SsoAuthService
      */
     public function migrateExistingUsers(): array
     {
-        $userModel = config('auth.providers.users.model', \App\Models\User::class);
+        $userModel = config('user-auth.providers.users.model', 'auth.providers.users.model');
         $defaultUserType = \MostafaFathi\UserAuth\Models\UserType::where('name', 'user')->first();
 
         if (!$defaultUserType) {

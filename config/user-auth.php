@@ -65,6 +65,12 @@ return [
         'bypass_sso' => env('BYPASS_SSO', false),
     ],
 
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | User Types

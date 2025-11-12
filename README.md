@@ -53,6 +53,17 @@ OTP_ENABLED=true
 TEST_EMAIL=test@example.com
 ```
 
+## To Overwrite Routes 
+```bash
+// SSO Routes
+Route::get('/auth/sso/redirect', [SsoAuthController::class, 'redirectToSso'])->name('sso.redirect');
+Route::get('/auth/sso/callback', [SsoAuthController::class, 'ssoCallback'])->name('sso.callback');
+
+// OTP Routes
+Route::get('/auth/verify', [SsoAuthController::class, 'otpVerifyPage'])->name('otpVerifyPage');
+Route::post('/auth/otp/request', [SsoAuthController::class, 'requestOtp'])->name('otp.request');
+Route::post('/auth/otp/verify', [SsoAuthController::class, 'verifyOtp'])->name('otp.verify');
+```
 ## SSO Configuration
 Configure your SSO providers in the "config/user-auth.php" file.
 
